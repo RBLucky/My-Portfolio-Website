@@ -60,7 +60,7 @@ function display_all() {
 
     // Checkout button functionality
     function displayTotal() {
-        document.getElementById("total").innerHTML = `Your Total = R${totalOrderAmt}0`;
+        document.getElementById("total").innerHTML = `Your Total = R${totalOrderAmt}`;
     }
     document.getElementById("checkout").addEventListener("click", displayTotal);
     
