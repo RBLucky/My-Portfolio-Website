@@ -17,21 +17,15 @@ function add_selection(x) {
 function removeSelection(x) {
     console.log(x);
     if (quantities[x] > 0) {
-        quantities[x] = quantities[x]-1;
+        quantities[x] = quantities[x] - 1;
+        totals[x] = prices[x] * quantities[x];
+        totalOrderAmt -= prices[x];
     }
-    totals[x] = prices[x]*quantities[x];
-    totalOrderAmt -= prices[x];
 
     display_all();
 }
 
-
-
-
 function display_all() {
-
-
-
     var myTable = "<table><th style='width: 100px; color: red; text-align: right;'>Num</th>";
     myTable += "<th style='width: 100px; color: red; text-align: right;'>Item</th>";
     myTable += "<th style='width: 100px; color: red; text-align: right;'>Price</th>";
@@ -42,30 +36,23 @@ function display_all() {
 
     for (i = 0; i < items.length; i++) {
         myTable += "<tr><td style='width: 100px; text-align: right;'>" + nums[i] + "</td>";
-        myTable += "<td style='width: 100px; text-align: right;'>" + items[i] + "</td><";
-        myTable += "<td style='width: 100px; text-align: right;'>" + prices[i] + "</td>";
+        myTable += "<td style='width: 100px; text-align: right;'>" + items[i] + "</td>";
+        myTable += "<td style='width: 100px; text-align: right;'>" + prices[i].toFixed(2) + "</td>";
         myTable += "<td style='width: 100px; text-align: right;'>" + quantities[i] + "</td>";
-        myTable += "<td style='width: 100px; text-align: right;'>" + totals[i] + "</td>";
+        myTable += "<td style='width: 100px; text-align: right;'>" + totals[i].toFixed(2) + "</td>";
         myTable += "<td><button onclick='add_selection(" + i + ")'>Add</button></td>";
-        myTable += "<td><button onclick='removeSelection(" + i + ")'>Remove</button></td>";
+        myTable += "<td><button onclick='removeSelection(" + i + ")'>Remove</button></td></tr>";
     }
 
     myTable += "</table>";
-    // myTable += "<br/><br/><p>Total: " + totalOrderAmt + "</p>";
 
-
-
-    // document.write(myTable);
     document.getElementById("demo").innerHTML = myTable;
 
     // Checkout button functionality
     function displayTotal() {
-        document.getElementById("total").innerHTML = `Your Total = R${totalOrderAmt}`;
+        document.getElementById("total").innerHTML = `Your Total = R${totalOrderAmt.toFixed(2)}`;
     }
     document.getElementById("checkout").addEventListener("click", displayTotal);
-    
-
-
 }
 
 window.onload = function () {
